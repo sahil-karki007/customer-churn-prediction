@@ -3,6 +3,7 @@ from fastapi import FastAPI
 import joblib
 import pandas as pd
 from fastapi.middleware.cors import CORSMiddleware
+import os
 
 app = FastAPI()
 
@@ -34,9 +35,13 @@ class CustomerData(BaseModel):
     TotalCharges: float
 
 
-model = joblib.load('../models/churn_model.pkl')
-preprocessor = joblib.load('../models/preprocessor.pkl')
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(BASE_DIR, '..', 'models', 'churn_model.pkl')
+PREPROCESSOR_PATH = os.path.join(BASE_DIR, '..', 'models', 'preprocessor.pkl')
+
+model = joblib.load(MODEL_PATH)
+preprocessor = joblib.load(PREPROCESSOR_PATH)
 
 @app.post('/predict')
 def predict_churn(customer: CustomerData):
