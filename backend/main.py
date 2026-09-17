@@ -9,7 +9,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Vite's default dev server
+    allow_origins=["https://customer-churn-sahil.netlify.app"],  # Vite's default dev server
     allow_methods=["*"],
     allow_headers=["*"],
 )
